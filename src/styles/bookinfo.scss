@@ -1,0 +1,425 @@
+.bookinfo {
+    &-container {
+        padding-top: 39px;
+        &-main, &-reviews{
+            width: 100%;
+            max-width: 1248px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            column-gap: 24px;
+            &-spacingcol {
+                grid-column: auto/span 1;
+            }
+            &-lcol {
+                grid-column: auto/span 6;
+                border-bottom: 1px solid $color-border-primary;
+                    &-summary {
+                        margin-bottom: 2px;
+                        &-list {
+                            display: flex;
+                            flex-direction: row;
+                            & > li {
+                                display: flex;
+                                & > p {
+                                    color: $color-text-secondary;
+                                    font-size: 14px;
+                                    line-height: 21px;
+                                }
+                            }
+                            > li:not(:last-child):after {
+                                content: "·";
+                                color: $color-text-secondary;
+                                padding: 0 8px;
+                                font-size: 48px;
+                                line-height: 16px;
+                            }
+                        }
+                    }
+                        &-data {
+                            display: flex;
+                            flex-direction: column;
+                            text-align: start;
+                            &-title {
+                                font-size: 43px;
+                                line-height: 53px;
+                            }
+                            &-author {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                margin-top: 31px;
+                                gap: 4px;
+                                & > span {
+                                    text-decoration: underline 1px solid $color-accent;
+                                    color: $color-accent;
+                                    font-weight: 600;
+                                }
+                            }
+                            &-rating {
+                                margin: 12px 0 24px 0;
+                            }
+                            &-desc {
+                                margin-top: 36px;
+                                & > h1 {
+                                    margin-bottom: 12px;
+                                }
+                            }
+                        }
+                    &-genre {
+                        position: relative;
+                        left: -20px;
+                        margin-top: 64px;
+                        margin-right: -20px;
+                    }
+                    &-more {
+                        margin-top: 56px;
+                        margin-bottom: 40px;
+                        &-list {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 40px;
+                            &-language, &-isbn, &-gr {
+                                display: flex;
+                                align-items: flex-start;
+                                flex-direction: column;
+                                & > p {
+                                    font-size: 13px;
+                                    margin-bottom: 4px;
+                                }
+                                & > span {
+                                    font-weight: 400;
+                                    & > a {
+                                        color: $color-text-primary;
+                                    }
+                                }
+                            }
+                        }
+                    }            
+            }
+            &-rcol {
+                grid-column: auto/span 3;
+                &-accent {
+                    position: relative;
+                    height: 232px;
+                    min-width: 282px;
+                    &-image {
+                        position: absolute;
+                        right: 53px;
+                        height: 232px;
+                        max-width: 175px;
+                        width: 100%;
+                        margin-top: 24px;
+                        box-shadow: 0 4px 6px rgba(0,0,0,.2);
+                        & > img {
+                            height: 100%;
+                            width: 100%;
+                        }
+                    }
+                }
+                &-actions {
+                    &-list {
+                        display: flex;
+                        flex-direction: column;
+                        &-preview {
+                            margin-top: 48px;
+                            & > #preview {
+                                width: 100%;
+                                padding: 12px 0;
+                                border-radius: 8px;        
+                                color: $color-text-tertiary;
+                                background-color: $color-accent;
+                                text-transform: none;
+                                &:hover {
+                                    background-color: rgba($color-accent, 0.9);
+                                }
+                                & > p {
+                                    color: $color-text-tertiary;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                        &-save, &-download, &-share {
+                            border-bottom: 1px solid $color-border-primary;
+                            & > button {
+                                width: 100%;
+                                display: flex;
+                                flex-direction: row;
+                                padding: 12px 0;
+                                margin: 4px 0;
+                                gap: 8px;
+                                text-transform: none;
+                                & > svg {
+                                    color: $color-text-primary;
+                                    height: 20px;
+                                    width: 20px;
+                                }
+                                & > p {
+                                    font-size: 15px;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &-divider {
+            border-top: 1px solid $color-border-primary;
+            background-color: #faf8f7;
+            height: 11px;
+            width: 100%;
+            display: inline-block;
+            margin: 96px 0;
+        }
+        &-reviews {
+            margin-bottom: 40px;
+            &-spacingcol {
+                grid-column: auto/span 2;
+            }
+            &-section {
+                text-align: start;
+                grid-column: auto/span 8;
+                &-header {
+                    margin-bottom: 32px;
+                    & > h1 {
+                        margin-bottom: 24px;
+                    }
+                    &-rating {
+                        margin: 12px 0 24px 0;
+                        &-more {
+                            padding-top: 10px;
+                            &-list {
+                                display: flex;
+                                flex-direction: row;
+                                & > li {
+                                    display: flex;
+                                    & > p {
+                                        font-size: 17px;
+                                        color: $color-text-primary;
+                                    }
+                                }
+                                > li:not(:last-child):after {
+                                    content: "·";
+                                    padding: 0 8px;
+                                    font-size: 48px;
+                                    line-height: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
+                &-form {
+                    padding: 32px;
+                    background-color: $color-background-secondary;
+                    &-rating {
+                        margin-bottom: 30px;
+                        & > p {
+                            color: #16171b;
+                            font-weight: 400;
+                            margin-bottom: 12px;
+                        }
+                        &-box {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            &-stars {
+                                display: flex;
+                                flex-direction: row;
+                                gap: 4px;
+                                &-item {
+                                    position: relative;
+                                    background-color: $color-text-tertiary;
+                                    & > label {
+                                        position: absolute;
+                                        white-space: nowrap;
+                                        left: 2px;
+                                        top: -35px;
+                                        background-color: $color-text-primary;
+                                        border-radius: 4px;
+                                        padding: 4px 12px;
+                                        font-size: 14px;
+                                        color: $color-text-tertiary;
+                                        font-weight: 400;
+                                        line-height: 21px;
+                                    }
+                                    & > button {
+                                        height: 40px;
+                                        border: 1px solid $color-border-search;
+                                        cursor: pointer;
+                                        & > svg {
+                                            color: $color-text-secondary;
+                                        }
+
+                                    }
+                                    .hovered {
+                                        border: 2px solid $color-text-primary;
+                                    }
+                                    .selected {
+                                        color: white;
+                                        background-color: $color-text-primary;
+                                        &:hover {
+                                            background-color: rgba($color-text-primary, 0.8) !important;
+                                        }
+                                        & > svg {
+                                            color: $color-text-tertiary;
+                                        }
+                                    }
+                                } 
+                            }
+                            & > p {
+                                margin-left: 24px;
+                            }
+                            & > #clear {
+                                margin-left: 8px;
+                                text-transform: none;
+                                border-radius: 8px;
+                                padding: 8px 16px;
+                                & > p {
+                                    color: $color-text-primary;
+                                    font-weight: 400; 
+                                }
+                            }
+                        }
+                    }
+                    &-textarea {
+                        & > p {
+                            font-weight: 400;
+                        }
+                        & > span {
+                            color: #63605b;
+                            font-size: 14px;
+                            line-height: 24px;
+                        }
+                        & > textarea {
+                            color: $color-text-secondary;
+                            margin: 8px 0;
+                            padding: 8px 16px;
+                            border: 1px solid $color-border-search;
+                            border-radius: 8px;
+                            width: 100%;
+                            min-height: 112px;
+                            resize: none;
+                        }
+                    }
+                    &-actions {
+                        margin-top: 44px;
+                        display: flex;
+                        justify-content: flex-end;
+                        & > #close, & > #post {
+                            text-transform: none;
+                            border-radius: 8px;
+                            padding: 8px 16px;
+                            & > p {
+                                color: $color-text-primary;
+                                font-weight: 500; 
+                            }
+                        }
+                        & > #post {
+                            background-color: $color-accent;
+                            margin-left: 16px;
+                            color: $color-text-tertiary;
+                            & > p {
+                                color: $color-text-tertiary;
+                            }
+                            &:hover {
+                                background-color: rgba($color-accent, 0.9);
+                            }
+                        }
+                    }
+                }
+                &-preview {
+                    &-card {
+                        border-bottom: 1px solid $color-border-primary;
+                        .MuiCollapse-wrapperInner {
+                            padding: 48px 0;
+                            display: inherit;
+                        }
+                        &-lcol {
+                            min-width: 180px;
+                            margin-right: 24px;
+                            & > p {
+                                margin-bottom: 8px;
+                                font-weight: 500;
+                            }
+                            &-rating {
+                                display: flex;
+                                align-items: center;
+                                gap: 6px;
+                                margin-bottom: 12px;
+                                & > p {
+                                    margin-left: 2px;
+                                }
+                                & > span {
+                                    line-height: 24px;
+                                    text-decoration: underline;
+                                    font-weight: 400;
+                                    margin-left: 4px;
+                                } 
+                                &-stars {
+                                    position: relative;
+                                    & > svg {
+                                        color: $color-star-filled;
+                                        height: 16px;
+                                        width: 16px;
+                                    }
+                                    & > .placeholder {
+                                        position: absolute;
+                                        z-index: -1;
+                                        right: 0;
+                                        color: $color-star-empty;
+                                    }
+                                    & > .empty {
+                                        color: transparent;
+                                    }
+                                }
+                            }
+                            &-actions {
+                                display: flex;
+                                flex-direction: column;
+                                & > #edit, & > #delete {
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: flex-start;
+                                    padding: 4px 6px;
+                                    gap: 8px;
+                                    text-transform: none;
+                                    & > p {
+                                        font-weight: 500;
+                                    }
+                                }
+                                & > #delete {
+                                    color: $color-error;
+                                }
+                            }
+                        }
+                        &-rcol {
+                            margin-top: 8px;
+                            &-actions {
+                                display: flex;
+                                align-items: center;
+                                margin-top: 24px;
+                                & > p {
+                                    margin-right: 8px;
+                                }
+                                display: flex;
+                                flex-direction: row;
+                                &-like, &-dislike {
+                                    gap: 5px;
+                                    display: flex;
+                                    & > span {
+                                        font-weight: 600;
+                                    }
+                                }
+                                &-dislike {
+                                    margin-left: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

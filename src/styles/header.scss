@@ -1,0 +1,150 @@
+.header {
+    background: $color-background-secondary;
+    position: relative;
+    z-index: 7;
+    &-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 24px;
+        max-width: 1248px;
+        height: 64px;
+        margin: 0 auto;
+        &-logo {
+            letter-spacing: 1px;
+            & > .no-style-link > p {
+                font-family: 'Maria', sans-serif;
+                font-size: 32px;
+                font-weight: 600;
+            }
+        }
+        &-search {
+            position: relative;
+            padding: 0 16px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            max-width: 777px;
+            margin-right: auto;
+            & > input {
+                width: 100%;
+                max-width: 555px;
+                border: 1px solid $color-border-search;
+                border-radius: 20px;
+                padding: 0 64px 0 16px;
+                height: 40px;
+                &:focus {
+                    outline: none;
+                    border: 2px solid $color-accent;
+                    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+                    &::placeholder {
+                        color: transparent;
+                    }
+                }
+            }
+            &-actions {
+                position: absolute;
+                bottom: 2px;
+                right: 18px;
+                display: flex;
+                & > #search > svg {
+                    height: 20px;
+                    width: 20px;
+                }
+                & > #close > svg {
+                    height: 18px;
+                    width: 18px;
+                }
+                &-divider {
+                    margin: 8px 2px;
+                    border-right: 1px solid $color-border-search;
+                }
+            }
+        }
+        &-language {
+            padding-right: 16px;
+            & > button {
+                display: flex;
+                gap: 4px;
+                & > p, & > svg {
+                    color: black;
+                }
+                & > svg {
+                    height: 10px;
+                    width: 10px;
+                }
+            }
+        }
+        &-auth {
+            &-actions {
+                position: relative;
+                display: flex;
+                gap: 4px;
+                & > #sign-up, #login {
+                    min-width: 96px;
+                    padding: 6px 20px;
+                    & > p {
+                        color: $color-text-primary;
+                        font-weight: 400;
+                        text-transform: none;
+                    }
+                }
+                & > #sign-up {
+                    color: white;
+                    background-color: $color-accent;
+                    & > p {
+                        color: $color-text-tertiary
+                    }
+                    &:hover {
+                        background-color: rgba($color-accent, 0.9);
+                    }
+                }
+                
+                & > #profile {
+                    border: 1px solid $color-border-secondary;
+                    & > svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                &-list {
+                    width: 280px;
+                    position: absolute;
+                    top: 50px;
+                    right: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background-color: $color-text-tertiary;
+                    border: 1px solid $color-border-primary;
+                    border-radius: 4px;
+                    box-shadow: 0 0 10px rgba(0,0,0,.1);
+                    animation: fadeIn 0.2s ease-in-out;
+                    padding-bottom: 32px;
+                    &-item:nth-child(1) {
+                        width: 220px;
+                        padding: 32px 16px;
+                        margin-bottom: 4px;
+                        border-bottom: 1px solid $color-border-primary;
+                        & > p {
+                            font-size: 18px;
+                            font-weight: 400;
+                        }
+                    }
+                    &-item {
+                        width: 100%;
+                        padding: 2px 0;
+                        & > button {
+                            width: 100%;
+                            text-transform: none;
+                            & > p {
+                                font-weight: 300;
+                                color: $color-text-primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }  
+    }
+} 

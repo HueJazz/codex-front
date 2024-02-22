@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 16px;
+  font-family: $font-primary;
+}
+
+h1, h2, h3, h4, h5 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 34px;
+  font-family: $font-secondary;
+}
+
+p, span, button, textarea {
+  font-size: 16px;
+  font-weight: 300;
+  font-family: $font-primary;
+}
+
+p {
+  text-transform: none;
+  color: $color-text-primary;
+  line-height: 24px;
+}
+
+ul, li {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+}
+
+.no-style-link {
+  text-decoration: none;
+  color: inherit;
+  outline-color: $color-accent;
+  border-radius: 4px;
+}
+
+.skeleton {
+  animation: skeleton 1.5s infinite linear;
+  background: linear-gradient(90deg, #eeee 25%, #e3e3e3 50%, #eeee 75%);
+  background-size: 200% 100%;
+  @keyframes skeleton {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+  }
+}

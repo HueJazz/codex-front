@@ -1,0 +1,50 @@
+.bookrating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        & > p {
+            margin-left: 2px;
+        }
+        & > .review {
+            font-size: 20px;
+            font-weight: 500;
+            margin-left: 16px;
+        }
+        & > .top {
+            line-height: 24px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 300;
+            margin-left: 0;
+            color: $color-text-secondary;
+        }
+        & > span {
+            line-height: 24px;
+            text-decoration: underline;
+            font-weight: 400;
+            margin-left: 4px;
+        } 
+        &-star {
+            position: relative;
+            & > svg {
+                position: relative;
+                z-index: 2;
+                color: $color-star-filled;
+                height: 16px;
+                width: 16px;
+            }
+            & > .review {
+                height: 20px !important;
+                width: 20px !important;
+            }
+            & > .placeholder {
+                position: absolute;
+                z-index: 1;
+                right: 0;
+                color: $color-star-empty;
+            }
+            & > .empty {
+                color: transparent;
+            }
+        }
+    }

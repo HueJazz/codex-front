@@ -1,0 +1,86 @@
+.subheader {
+    box-shadow: 0 4px 4px rgba(0,0,0,.02);
+    &-container {
+        position: relative;
+        &-main {
+            background-color: $color-text-tertiary;
+            position: relative;
+            z-index: 6;
+            border-bottom: 1px solid $color-border-primary;
+            &-list {
+                padding: 0 24px;
+                max-width: 1248px;
+                margin: 0 auto;
+                height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+                &-item {
+                    margin-left: 16px;
+                }
+                &-item:last-child {
+                    padding-left: 16px;
+                    margin-left: 0;
+                    border-left: 1px solid $color-border-secondary;
+                    & > button {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 6px;
+                        & > svg {
+                            height: 10px;
+                            width: 10px;
+                            color: $color-text-primary;
+                        }
+                        & > .open {
+                            transition: rotate 0.2s ease-in-out;
+                            rotate: 180deg;
+                        }
+                    }
+                }
+            }
+        }
+        &-genres {
+            position: absolute;
+            z-index: 5;
+            background-color: $color-text-tertiary;
+            width: 100%;
+            border-bottom: 1px solid $color-border-primary;
+            box-shadow: 0 4px 4px rgba(0,0,0,.02);
+            padding: 16px 0 32px 0;     
+            animation: slideIn 0.2s ease-out;
+            &-list {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                padding: 0 24px 0 108px;
+                max-width: 1248px;
+                margin: 0 auto;
+                max-height: 600px;
+                &-item {
+                    width: 200px;
+                    text-align: start;
+                    padding: 4px;
+                    margin: 6px 0;
+                    cursor: pointer;
+                    & > p:hover {
+                        transition: color 0.1s;
+                        color: $color-accent;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        top: -1000%;
+    }
+    100% {
+        top: 100%;
+    }
+}

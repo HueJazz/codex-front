@@ -1,0 +1,48 @@
+.bookcollectionheader {
+    margin: 32px 0;
+    &-container {
+        position: relative;
+        max-width: 1248px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 24px;
+        text-align: start;
+        & > h1 {
+            font-size: 52px;
+            line-height: 68px;
+        }
+        & > p {
+            width: 60%;
+            font-size: 18px;
+            line-height: 28px;
+            margin: 8px 0 24px 0;
+            color: #596280;
+        }
+        &-tabs {
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid $color-border-primary;
+        
+            &-item {
+                width: 100%;
+                max-width: 100px;
+                & > button {
+                    width: 100%;
+                    padding: 12px 0;
+                }
+                & > .active {
+                    color: $color-text-primary;
+                    transition: color 0.3s ease-in-out;
+                }
+            }
+        }
+        &-slider {
+            position: absolute;
+            width: 100px;
+            bottom: 0;
+            height: 3px;
+            background-color: $color-accent;
+            transition: transform 0.3s ease;
+        }
+    }
+}
