@@ -1,5 +1,5 @@
 .bookspotlight {
-    margin: 12px 0;
+    margin: 32px 0;
     &-container {
         max-width: 1248px;
         width: 100%;
@@ -11,16 +11,18 @@
         }
         &-main {
             position: relative;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 50px;
-            margin-bottom: 56px;
-            gap: 48px;
             border: 1px solid $color-border-primary;
             border-radius: 4px;
+            margin-bottom: 56px;
             &:hover {
                 box-shadow: 0 2px 10px rgba(0,0,0,.1);
+            }
+            & > .no-style-link {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 50px;
+                gap: 48px;
             }
             &-lcol {
                 &-accent {
@@ -35,6 +37,7 @@
                     height: 284px;
                     width: 214px;
                     box-shadow: 0 4px 6px rgba(0,0,0,.2);
+                    background-color: #cfd6e0;
                     & > img {
                         height: 100%;
                         width: 214px;
@@ -91,16 +94,12 @@
                         text-align: start;
 
                     }
-                    &-rating {
-                        line-height: 40px;
-                    }
                 }
-                &-more {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-between;
-                }
+            }
+            &-actions {
+                position: absolute;
+                bottom: 50px;
+                right: 50px;
             }
         }
     }

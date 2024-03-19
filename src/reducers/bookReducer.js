@@ -6,7 +6,8 @@ const initialState = {
     bookCollection: {},
     bookTop: [],
     bookLoading: true,
-    collectionLoading: true,
+    topLoading: true,
+    collectionLoading: {},
 }
 
 export const getBook = createAsyncThunk(
@@ -37,11 +38,9 @@ export const getSpotlight = createAsyncThunk(
 
 export const getCollection = createAsyncThunk(
     "book/getCollection",
-    async (bookGenre, maxResults = 12, thunkAPI) => {
+    async ({ genreName, maxResults }, thunkAPI) => {
         try {
-            const res = await axios.get(`http://localhost:4444/books/genres/${bookGenre}`, {
-              params: { maxResults },
-            });
+            const res = await axios.get(`http://localhost:4444/books/genres/${genreName}?maxResults=${maxResults}`);
             return res.data;
 
         } catch (err) {
@@ -52,17 +51,13 @@ export const getCollection = createAsyncThunk(
 
 export const getTop = createAsyncThunk(
     "book/getTop",
-    async (bookGenre, maxResults = 20, thunkAPI) => {
+    async ({ genreName, maxResults }, thunkAPI) => {
         try {
             let res
-            if(bookGenre) {
-                res = await axios.get(`http://localhost:4444/genres/${bookGenre}/top`, {
-                    params: { maxResults },
-                });
+            if(genreName) {
+                res = await axios.get(`http://localhost:4444/genres/${genreName}/top?maxResults=${maxResults}`);
             } else {
-                res = await axios.get(`http://localhost:4444/top`, {
-                    params: { maxResults },
-                });
+                res = await axios.get(`http://localhost:4444/top?maxResults=${maxResults}`);
             }
             return res.data;
 
@@ -98,29 +93,40 @@ const bookSlice = createSlice({
             .addCase(getSpotlight.rejected, (state) => {
                 state.bookLoading = true;
             })
-            .addCase(getCollection.pending, (state) => {
-                state.collectionLoading = true;
+            .addCase(getCollection.pending, (state, { meta }) => {
+                const genre = meta.arg.genreName;
+                state.collectionLoading = {
+                    ...state.collectionLoading,
+                    [genre]: true,
+                };
             })
             .addCase(getCollection.fulfilled, (state, { payload, meta }) => {
-                state.collectionLoading = false;
-                const genre = meta.arg;
+                const genre = meta.arg.genreName;
+                state.collectionLoading = {
+                    ...state.collectionLoading,
+                    [genre]: false,
+                };
                 state.bookCollection = {
                     ...state.bookCollection,
                     [genre]: payload,
                 };
             })
-            .addCase(getCollection.rejected, (state) => {
-                state.collectionLoading = true;
+            .addCase(getCollection.rejected, (state, { meta }) => {
+                const genre = meta.arg.genreName;
+                state.collectionLoading = {
+                    ...state.collectionLoading,
+                    [genre]: true,
+                };            
             })
             .addCase(getTop.pending, (state) => {
-                state.bookLoading = true;
+                state.topLoading = true;
             })
             .addCase(getTop.fulfilled, (state, { payload }) => {
-                state.bookLoading = false;
+                state.topLoading = false;
                 state.bookTop = payload;
             })
             .addCase(getTop.rejected, (state) => {
-                state.bookLoading = true;
+                state.topLoading = true;
             })
     }
 })

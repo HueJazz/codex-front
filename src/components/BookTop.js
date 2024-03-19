@@ -1,28 +1,16 @@
-import React, { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux";
+import React from "react"
+import { useSelector } from "react-redux";
 import BookTopSkeleton from "./BookTopSkeleton";
-import { getTop } from "../reducers/bookReducer";
 import BookTopCard from "./BookTopCard"
 
-function BookTop ({ genre }) {
+function BookTop () {
 
-    const dispatch = useDispatch()
-
-    const { bookTop, collectionLoading } = useSelector((state) => state.book)
-
-    useEffect(() => {
-        if (genre) {
-            dispatch(getTop(genre))
-        }
-        else {
-            dispatch(getTop())
-        }
-    }, [dispatch, genre])
+    const { bookTop, topLoading } = useSelector((state) => state.book)
+    const { library } = useSelector((state) => state.library)
 
     return (
         <div className="booktop">
-            {collectionLoading ? (
-                <BookTopSkeleton />) : (
+            {topLoading ? <BookTopSkeleton /> : (
                 <div className="booktop-container">
                     <div className="booktop-container-header">
                         <h1>Top Rated</h1>
@@ -30,7 +18,7 @@ function BookTop ({ genre }) {
                     <ul className="booktop-container-list">
                         {bookTop.map((book, index) => (
                             <li key={book._id} className="booktop-container-list-item">
-                                <BookTopCard book={book} index={index} />
+                                <BookTopCard book={book} index={index} isSaved={library.books?.some(item => item._id === book._id)} />
                             </li>
                         ))}
                     </ul>

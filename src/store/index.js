@@ -4,6 +4,9 @@ import reviewsReducer from "../reducers/reviewsReducer";
 import authReducer from "../reducers/authReducer";
 import libraryReducer from "../reducers/libraryReducer";
 import genresReducer from "../reducers/genresReducer";
+import searchReducer from "../reducers/searchReducer";
+import listsReducer from "../reducers/listsReducer";
+
 
 export default configureStore({
     reducer: {
@@ -12,5 +15,7 @@ export default configureStore({
         reviews : reviewsReducer,
         library: libraryReducer,
         genres: genresReducer,
+        search: searchReducer,
+        lists: listsReducer,
     }
 })

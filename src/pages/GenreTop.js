@@ -1,23 +1,23 @@
 import React, { useEffect } from "react"
-import Header from "../components/Header";
-import BookCollection from "../components/BookCollection";
-import BookCollectionHeader from "../components/BookCollectionHeader";
-import BookSpotlight from "../components/BookSpotlight";
-import BookGenres from "../components/BookGenres";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getCollection } from "../reducers/bookReducer";
+import { useDispatch } from "react-redux";
 import { getLibrary } from "../reducers/libraryReducer";
-import { getRelatedGenres } from "../reducers/genresReducer";
 import BookTop from "../components/BookTop";
+import { getTop } from "../reducers/bookReducer";
 
 function GenreTop () {
     
     const {genreName} = useParams()
     const dispatch = useDispatch()
+    const maxResults = 12;
 
     useEffect(() => {
-        dispatch(getCollection(genreName))
+        if (genreName) {
+            dispatch(getTop({ genreName, maxResults }))
+        }
+        else {
+            dispatch(getTop({ maxResults }))
+        }
         dispatch(getLibrary())
     }, [dispatch, genreName])
 

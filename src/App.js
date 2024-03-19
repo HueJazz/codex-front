@@ -1,17 +1,21 @@
 import './App.css';
 import Home from './pages/Home';
-import Book from './pages/Book';
 import HomeLayout from './layouts/HomeLayout';
 import GenreLayout from './layouts/GenreLayout';
 import GenreOverview from './pages/GenreOverview';
 import GenreTop from './pages/GenreTop';
-import Library from './pages/Library';
+import Library from './components/Library';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { useDispatch } from "react-redux"; 
 import { getMe } from "./reducers/authReducer"
+import BookInfo from './components/BookInfo';
+import BookSearch from './components/BookSearch';
+import ListInfo from './components/ListInfo';
+import UserProfile from './components/UserProfile';
+import UserReviews from './components/UserReviews';
 
 function App() {
 
@@ -25,16 +29,20 @@ function App() {
     <div className="App">
         <Router>
           <Routes>
-            <Route path="/" element={<HomeLayout />}>
-              <Route index element={<Home/>}/>
-              <Route path="top" element={<GenreTop/>}/>
+            <Route element={<HomeLayout />}>
+              <Route path="search/:item" element={<BookSearch/>}/>
+              <Route path="/books/:bookId" element={<BookInfo/>}/>
+              <Route path="/library" element={<Library/>}/>
+              <Route path="/users/:userid" element={<UserProfile />}/>
+              <Route path="/lists/:listId" element={<ListInfo/>}/>
+              <Route path="/users/:userid/reviews" element={<UserReviews />}/>
+              <Route path="/" element={<GenreLayout />}>
+                <Route index element={<Home/>}/>
+                <Route path="top" element={<GenreTop/>}/>
+                <Route path="genres/:genreName"  element={<GenreOverview/>}/>
+                <Route path="genres/:genreName/top" element={<GenreTop/>}/>
+              </Route>
             </Route>
-            <Route path="/books/:bookId" element={<Book/>}/>
-            <Route path="genres/:genreName" element={<GenreLayout />}>
-              <Route index element={<GenreOverview/>}/>
-              <Route path="top" element={<GenreTop/>}/>
-            </Route>
-            <Route path="/library" element={<Library/>}/>
             <Route path="/sign-in" element={<Login />}/>
             <Route path="/sign-up" element={<Registration />}/>
           </Routes>

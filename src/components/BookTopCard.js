@@ -10,55 +10,51 @@ import { saveBook, deleteBook } from "../reducers/libraryReducer";
 import { getColorFromId } from "../utils/getColorFromId";
 import { NavLink } from "react-router-dom";
 
-function BookTopCard ({ book, index }) {
+function BookTopCard ({ book, index, isSaved }) {
 
     const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar();
 
-    const [ isSaved, setIsSaved ] = useState(false)
-    const { library } = useSelector((state) => state.library)
+    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        library.books && library.books.some(item => item._id === book._id)
-            ? setIsSaved(true)
-            : setIsSaved(false)
-    }, [library, book]);
-
-    const handleSave = (bookId) => {
-        dispatch(saveBook(bookId))
-        enqueueSnackbar('Saved to My Books')
-    }
-
-    const handleDelete = (bookId) => {
-        dispatch(deleteBook(bookId))
-        enqueueSnackbar('Removed from My Books')
-    }
+    const handleAction = async (action) => {
+        setIsLoading(true);
+        const actionText = action === "save" ? "Saved to" : "Removed from";
+        try {
+            await dispatch(action === "save" ? saveBook(book._id) : deleteBook(book._id));
+            enqueueSnackbar(`${actionText} My Books`);
+        } catch (error) {
+            enqueueSnackbar(`Error ${actionText.toLowerCase()} book`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
-        <NavLink to={`/books/${book._id}`} className='no-style-link'>
-            <div className="booktop-container-list-item-accent" style={{backgroundColor: getColorFromId(book._id)}}></div>
-            <div className="booktop-container-list-item-image">
-                <img alt={book.title} src={book.img}></img>
-            </div>
-            <div className="booktop-container-list-item-data">
-                <p className="booktop-container-list-item-data-place">{index + 1}.</p>
-                <p className="booktop-container-list-item-data-title">{book.title}</p>
-                <p className="booktop-container-list-item-data-author">{book.author}</p>
-                <div className="booktop-container-list-item-data-rating">
-                    <BookRating book={book} isTop={true}/>
+        <div className="booktop-container-list-item-card">
+            <div className="booktop-container-list-item-card-accent" style={{ backgroundColor: getColorFromId(book._id) }}></div>
+            <NavLink to={`/books/${book._id}`} className='no-style-link'>
+                <div className="booktop-container-list-item-card-accent" style={{ backgroundColor: getColorFromId(book._id) }}></div>
+                <div className="booktop-container-list-item-card-image">
+                    <img alt={book.title} src={book.img}></img>
                 </div>
-                <p className="booktop-container-list-item-data-desc">{book.desc}</p>
+                <div className="booktop-container-list-item-card-data">
+                    <p className="booktop-container-list-item-card-data-place">{index + 1}.</p>
+                    <p className="booktop-container-list-item-card-data-title">{book.title}</p>
+                    <p className="booktop-container-list-item-card-data-author">{book.author}</p>
+                    <div className="booktop-container-list-item-card-data-rating">
+                        <BookRating book={book} isTop={true} />
+                    </div>
+                    <p className="booktop-container-list-item-card-data-desc">{book.desc}</p>
+                </div>
+            </NavLink>
+            <div className="booktop-container-list-item-card-actions">
+                <IconButton id={isSaved ? "delete" : "save"} disabled={isLoading}
+                    onClick={() => handleAction(isSaved ? "delete" : "save")}>
+                    <FontAwesomeIcon icon={isSaved ? faBookmarkSolid : faBookmark} />
+                </IconButton>
             </div>
-            <div className="booktop-container-list-item-actions">
-                {isSaved ? <IconButton id="delete" onClick={(e) => { handleDelete(book._id); e.preventDefault() }}>
-                    <FontAwesomeIcon icon={faBookmarkSolid} />
-                </IconButton> :
-                    <IconButton id="save" onClick={(e) => { handleSave(book._id); e.preventDefault() }}>
-                        <FontAwesomeIcon icon={faBookmark} />
-                    </IconButton>
-                }
-            </div>
-        </NavLink>
+        </div>
     );
 }
 

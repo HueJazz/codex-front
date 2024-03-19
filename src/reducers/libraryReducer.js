@@ -62,11 +62,11 @@ const librarySlice = createSlice({
                 state.libraryLoading = true;
             })
             .addCase(saveBook.fulfilled, (state, { payload }) => {
-                state.libraryLoading = false;
+                state.actionLoading = false;
                 state.library.books = [payload, ...state.library.books];
             })
             .addCase(deleteBook.fulfilled, (state, { meta }) => {
-                state.libraryLoading = false;
+                state.actionLoading = false;
                 state.library.books = state.library.books.filter(book => book._id !== meta.arg);
             })
     }

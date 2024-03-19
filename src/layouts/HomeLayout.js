@@ -1,15 +1,14 @@
 import React from "react"
 import Header from "../components/Header";
-import BookCollectionHeader from "../components/BookCollectionHeader";
-
 import { Outlet } from "react-router-dom";
+import ScrollTop from "../components/ScrollTop";
 
 function HomeLayout () {
     
     return (
         <div>
+            <ScrollTop />
             <Header />
-            <BookCollectionHeader/>
             <Outlet />
         </div>
     )

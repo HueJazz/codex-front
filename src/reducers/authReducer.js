@@ -3,6 +3,7 @@ import axios from '../utils/axios';
 
 const initialState = {
     userData: {},
+    userProfile: {},
     isLoading: true,
     isAuth: false,
 }
@@ -47,6 +48,20 @@ export const getMe = createAsyncThunk (
     async(thunkAPI) => {
         try {
             const res = await axios.get('http://localhost:4444/auth/me');
+      
+            return res.data;
+
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err);
+        }
+    }
+)
+
+export const getProfile = createAsyncThunk (
+    "auth/getProfile",
+    async(userId, thunkAPI) => {
+        try {
+            const res = await axios.get(`http://localhost:4444/users/${userId}`);
       
             return res.data;
 
@@ -104,6 +119,17 @@ const authSlice = createSlice({
             .addCase(getMe.rejected, (state) => {
                 state.isLoading = false;
                 state.isAuth = false;
+            })
+            .addCase(getProfile.pending, (state) => {
+                state.isLoading = true;
+
+            })
+            .addCase(getProfile.fulfilled, (state, {payload}) => {
+                state.isLoading = false;
+                state.userProfile = payload;
+            })
+            .addCase(getProfile.rejected, (state) => {
+                state.isLoading = false;
             })
     }
 })

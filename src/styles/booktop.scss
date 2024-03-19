@@ -1,5 +1,5 @@
 .booktop {
-    padding: 16px 0;
+    margin: 32px 0;
     &-container {
         max-width: 1248px;
         width: 100%;
@@ -15,94 +15,96 @@
             gap: 24px;
             &-item {
                 width: calc(50% - 12px);
-                & > .no-style-link {
+                &-card {
                     position: relative;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: flex-start;
-                    padding: 40px 24px 40px 32px;
                     background-color: #f9faff;
                     border: 1px solid #e3e6ef;
                     &:hover {
                         box-shadow: 0 2px 10px rgba(0,0,0,.1);
                     }
-                }
-                &-accent {
-                    position: absolute;
-                    z-index: 1;
-                    top: 0;
-                    left: 0;
-                    width: 130px;
-                    height: 100%;
-                    border-top-left-radius: 3px;
-                    border-bottom-left-radius: 3px;
-                }
-                &-image {
-                    position: relative;
-                    z-index: 2;
-                    margin-right: 32px;
-                    height: 172px;
-                    width: 130px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
-                    & > img {
-                        height: 100%;
+                    & > .no-style-link {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        padding: 40px 24px 40px 32px;
+                    }
+                    &-accent {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        z-index: 1;
                         width: 130px;
+                        height: 100%;
+                        border-top-left-radius: 3px;
+                        border-bottom-left-radius: 3px;
                     }
-                }
-
-                &-data {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    &-place {
-                        font-size: 18px;
-                        font-weight: 400;
+                    &-image {
+                        position: relative;
+                        z-index: 2;
+                        margin-right: 32px;
+                        height: 172px;
+                        width: 130px;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
+                        & > img {
+                            height: 100%;
+                            width: 130px;
+                        }
                     }
-                    &-title {
-                        display: -webkit-box;
-                        overflow: hidden;
-                        -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;
-                        text-align: start;
-                        line-height: 26px;
-                        font-size: 22px;
-                        font-weight: 400;
+    
+                    &-data {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        &-place {
+                            font-size: 18px;
+                            font-weight: 400;
+                        }
+                        &-title {
+                            display: -webkit-box;
+                            overflow: hidden;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            text-align: start;
+                            line-height: 26px;
+                            font-size: 22px;
+                            font-weight: 400;
+                        }
+                        &-author {
+                            display: -webkit-box;
+                            overflow: hidden;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            text-align: start;
+                            font-weight: 400;
+                            line-height: 24px;
+                            margin-top: 2px;
+                            color: $color-accent;
+                        }
+                        &-rating {
+                            display: -webkit-box;
+                            overflow: hidden;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            margin: 8px 0;
+                        }
+                        &-desc {
+                            display: -webkit-box;
+                            overflow: hidden;
+                            -webkit-line-clamp: 3;
+                            -webkit-box-orient: vertical;
+                            text-align: start;
+                        }
                     }
-                    &-author {
-                        display: -webkit-box;
-                        overflow: hidden;
-                        -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;
-                        text-align: start;
-                        font-weight: 400;
-                        line-height: 24px;
-                        margin-top: 2px;
-                        color: $color-accent;
-                    }
-                    &-rating {
-                        display: -webkit-box;
-                        overflow: hidden;
-                        -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;
-                        margin: 8px 0;
-                    }
-                    &-desc {
-                        display: -webkit-box;
-                        overflow: hidden;
-                        -webkit-line-clamp: 3;
-                        -webkit-box-orient: vertical;
-                        text-align: start;
-                    }
-                }
-                &-actions {
-                    position: absolute;
-                    top: 20px;
-                    right: 20px;
-
-                    & > button {
-                        & > svg {
-                            width: 20px;
-                            height: 20px;
+                    &-actions {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+    
+                        & > button {
+                            & > svg {
+                                width: 20px;
+                                height: 20px;
+                            }
                         }
                     }
                 }

@@ -26,7 +26,6 @@ export const getRelatedGenres = createAsyncThunk(
     async (genre, thunkAPI) => {
         try {
             const res = await axios.get(`http://localhost:4444/genres/${genre}`)
-            console.log(res.data)
             return res.data;
 
         } catch (err) {

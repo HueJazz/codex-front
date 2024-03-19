@@ -18,6 +18,7 @@ function BookSpotlight ({ genre }) {
     const { enqueueSnackbar } = useSnackbar();
 
     const [ isSaved, setIsSaved ] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
     const { library } = useSelector((state) => state.library)
     const { book, bookLoading } = useSelector((state) => state.book)
 
@@ -31,15 +32,29 @@ function BookSpotlight ({ genre }) {
             : setIsSaved(false)
     }, [library, book]);
 
-    const handleSave = (bookId) => {
-        dispatch(saveBook(bookId))
-        enqueueSnackbar('Saved to My Books')
-    }
-
-    const handleDelete = (bookId) => {
-        dispatch(deleteBook(bookId))
-        enqueueSnackbar('Removed from My Books')
-    }
+    const handleSave = async () => {
+        setIsLoading(true);
+        try {
+            await dispatch(saveBook(book._id));
+            enqueueSnackbar('Saved to My Books');
+        } catch (error) {
+            enqueueSnackbar('Error saving book');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
+    const handleDelete = async () => {
+        setIsLoading(true);
+        try {
+            await dispatch(deleteBook(book._id));
+            enqueueSnackbar('Removed from My Books');
+        } catch (error) {
+            enqueueSnackbar('Error removing book');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="bookspotlight">
@@ -50,8 +65,8 @@ function BookSpotlight ({ genre }) {
                         <h1>Spotlight</h1>
                         <p>Discover the spotlight on the latest releases and captivating ebooks you won't want to overlook.</p>
                     </div>
-                    <NavLink to={`/books/${book._id}`} className='no-style-link'>
-                        <div className="bookspotlight-container-main">
+                    <div className="bookspotlight-container-main">
+                        <NavLink to={`/books/${book._id}`} className='no-style-link'>
                             <div className="bookspotlight-container-main-lcol">
                                 <div className="bookspotlight-container-main-lcol-accent" style={{ backgroundColor: getColorFromId(book._id) }}></div>
                                 <div className="bookspotlight-container-main-lcol-image">
@@ -68,21 +83,21 @@ function BookSpotlight ({ genre }) {
                                     <p className="bookspotlight-container-main-rcol-data-author">{book.author}</p>
                                     <p className="bookspotlight-container-main-rcol-data-desc">{book.desc}</p>
                                 </div>
-                                <div className="bookspotlight-container-main-rcol-more">
+                                <div className="bookspotlight-container-main-rcol-rating">
                                     <BookRating book={book} isReview={true} />
-                                    <div className="bookspotlight-container-main-rcol-more-actions">
-                                        {isSaved ? <IconButton id="delete" onClick={(e) => { handleDelete(book._id); e.preventDefault() }}>
-                                            <FontAwesomeIcon icon={faBookmarkSolid} />
-                                        </IconButton> :
-                                            <IconButton id="save" onClick={(e) => { handleSave(book._id); e.preventDefault() }}>
-                                                <FontAwesomeIcon icon={faBookmark} />
-                                            </IconButton>
-                                        }
-                                    </div>
                                 </div>
                             </div>
+                        </NavLink>
+                        <div className="bookspotlight-container-main-actions">
+                            {isSaved ? <IconButton id="delete" disabled={isLoading} onClick={() => handleDelete(book._id)}>
+                                <FontAwesomeIcon icon={faBookmarkSolid} />
+                            </IconButton> :
+                                <IconButton id="save" disabled={isLoading} onClick={() => handleSave(book._id)}>
+                                    <FontAwesomeIcon icon={faBookmark} />
+                                </IconButton>                                
+                            }
                         </div>
-                    </NavLink>
+                    </div>
                 </div>
             )}
         </div>

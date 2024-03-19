@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { saveBook, deleteBook } from "../reducers/libraryReducer";
@@ -14,47 +14,48 @@ function BookCollectionCard({ book, isSaved }) {
 
     const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar();
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSave = (bookId) => {
-        dispatch(saveBook(bookId))
-        enqueueSnackbar('Saved to My Books')
-    }
-
-    const handleDelete = (bookId) => {
-        dispatch(deleteBook(bookId))
-        enqueueSnackbar('Removed from My Books')
-    }
+    const handleAction = async (action) => {
+        setIsLoading(true);
+        const actionText = action === "save" ? "Saved to" : "Removed from";
+        try {
+            await dispatch(action === "save" ? saveBook(book._id) : deleteBook(book._id));
+            enqueueSnackbar(`${actionText} My Books`);
+        } catch (error) {
+            enqueueSnackbar(`Error ${actionText.toLowerCase()} book`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
-        <NavLink to={`/books/${book._id}`} className='no-style-link'>
-            <div className="bookcollection-container-swiper-slide">
-                <div className="bookcollection-container-swiper-slide-accent" style={{ backgroundColor: getColorFromId(book._id) }}></div>
+        <div className="bookcollection-container-swiper-slide">
+            <NavLink to={`/books/${book._id}`} className='no-style-link'>
+                <div className="bookcollection-container-swiper-slide-accent" 
+                    style={{ backgroundColor: getColorFromId(book._id) }}>    
+                </div>
                 <div className="bookcollection-container-swiper-slide-image">
-                    <img alt={book.title} src={book.img}></img>
+                    <img alt={book.title} src={book.img} loading="lazy"></img>
                 </div>
                 <div className="bookcollection-container-swiper-slide-data">
                     <p className="bookcollection-container-swiper-slide-data-bookformat">{book.bookformat}</p>
                     <p className="bookcollection-container-swiper-slide-data-title">{book.title}</p>
                     <p className="bookcollection-container-swiper-slide-data-author">{book.author}</p>
                 </div>
-                <div className="bookcollection-container-swiper-slide-details">
-                    <div className="bookcollection-container-swiper-slide-details-rating">
-                        <FontAwesomeIcon icon={faStar} />
-                        <p>{book.rating}</p>
-                        <span>({book.totalratings})</span>
-                    </div>
-                    <div className="bookcollection-container-swiper-slide-details-actions">
-                        {isSaved ? <IconButton id="delete" onClick={(e) => { handleDelete(book._id); e.preventDefault() }}>
-                            <FontAwesomeIcon icon={faBookmarkSolid} />
-                        </IconButton> :
-                            <IconButton id="save" onClick={(e) => { handleSave(book._id); e.preventDefault() }}>
-                                <FontAwesomeIcon icon={faBookmark} />
-                            </IconButton>
-                        }
-                    </div>
+                <div className="bookcollection-container-swiper-slide-rating">
+                    <FontAwesomeIcon icon={faStar} />
+                    <p>{book.rating}</p>
+                    <span>({book.totalratings})</span>
                 </div>
+            </NavLink>
+            <div className="bookcollection-container-swiper-slide-actions">
+                <IconButton id={isSaved ? "delete" : "save"} disabled={isLoading}
+                    onClick={() => handleAction(isSaved ? "delete" : "save")}>
+                    <FontAwesomeIcon icon={isSaved ? faBookmarkSolid : faBookmark} />
+                </IconButton>
             </div>
-        </NavLink>
+        </div>
 
     );
 }

@@ -17,14 +17,13 @@ function GenreOverview () {
 
     useEffect(() => {
         dispatch(getRelatedGenres(genreName))
-        dispatch(getCollection(genreName))
         dispatch(getLibrary())
     }, [dispatch, genreName])
 
     return (
         <div>
             <BookSpotlight genre={genreName}/>    
-            <BookCollection genre={genreName}/>
+            <BookCollection genreName={genreName}/>
             <div className="relatedgenres">
                 <h1>Discover more in {genreName}</h1>
                 <p>From classic favorites to brand new hits, it’s all here for you to discover.</p>

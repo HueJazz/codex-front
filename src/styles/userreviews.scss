@@ -1,4 +1,4 @@
-.library {
+.userreviews {
     padding: 20px;
     &-container {
         width: 100%;
@@ -13,12 +13,7 @@
         }
         &-lcol {
             padding: 28px 0px;
-            grid-column: auto/span 6;
-            &-header {
-                min-height: 45px;
-                text-align: start;
-                border-bottom: 1px solid $color-border-primary;
-            }
+            grid-column: auto/span 7;
             &-actions {
                 padding: 10px 0;
                 display: flex;
@@ -70,33 +65,15 @@
                             width: 100%;
                             display: flex;
                         }
-                        &:hover {
-                            .library-container-list-item-image {
-                                filter: brightness(0.95);
-                            }
-                        }
                     }
                     &-image {
                         position: relative;
-                        height: 144px;
+                        max-height: 144px;
                         width: 110px;
                         border: 1px solid $color-border-secondary;
                         & > img {
                             height: 100%;
                             width: 108px;
-                        }
-                        &-poper {
-                            animation: fadeIn 0.2s ease-out;
-                            position: absolute;
-                            bottom: 0;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            background-color: rgba($color-text-primary, 0.8);
-                            width: 100%;
-                            & > p {
-                                color: $color-text-tertiary;  
-                                padding: 4px 0;
-                            }
                         }
                     }
                     &-data {
@@ -115,34 +92,63 @@
                             font-size: 20px;
                             font-weight: 600;
                         }
-                        &-author {
-                            display: -webkit-box;
-                            overflow: hidden;
-                            -webkit-line-clamp: 2;
-                            -webkit-box-orient: vertical;
-                            max-width: 90%;
-                            font-size: 18px;
-                            font-weight: 400;
+                        &-rating {
+                            display: flex;
+                            align-items: center;
+                            gap: 2px;
+                            margin: 8px 0 12px 0;
+                            &-stars {
+                                position: relative;
+                                & > svg {
+                                    color: $color-star-filled;
+                                    height: 16px;
+                                    width: 16px;
+                                }
+                                & > .empty {
+                                    color: transparent;
+                                }
+                            }
                         }
-                        &-progress {
-                            margin-top: 10px;
-                            max-width: 285px;
-                            height: 5px;
-                            background-color: $color-border-secondary;
-                            border-radius: 10px;
+                        &-text {
                         }
-                        & > .finished {
-                            background-color: $color-text-primary;
+                        &-list {
+                            margin-top: 24px;
+                            display: flex;
+                            flex-direction: row;
+                            & > li {
+                                display: flex;
+                                & > p {
+                                    font-size: 15px;
+                                }
+                            }
+                            > li:not(:last-child):after {
+                                content: "·";
+                                color: $color-text-secondary;
+                                padding: 0 8px;
+                                font-size: 48px;
+                                line-height: 20px;
+                            }
                         }
-                        &-pages {
-                            margin-top: auto;
-                        }
-                        &-finished {
-                            margin-top: auto;
+                        &-actions {
                             display: flex;
                             flex-direction: row;
                             align-items: center;
-                            gap: 8px;
+                            gap: 4px;
+                            margin-left: -8px;
+                            & > p {
+                                font-weight: 500;
+                                margin-right: 16px;
+                                color: $color-text-secondary;
+                            }
+                            & > #like, & > #comment, & > #more {
+                                & > svg {
+                                    width: 16px;
+                                    height: 16px;
+                                }
+                            }
+                            & > #more {
+                                transform: rotate(90deg);
+                            }
                         }
                     }
                     &-actions {
@@ -186,57 +192,8 @@
             }
         }
         &-rcol {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             padding: 28px 0px;
-            grid-column: auto/span 3;
-            &-header {
-                display: flex;
-                flex-direction: column;
-                padding: 10px 0;
-                width: 100%;
-                &-new {
-                    align-self: flex-start;
-                    font-size: 18px;
-                    font-weight: 500;
-                    margin-bottom: 14px;
-                }
-                & > span {
-                    width: 100%;
-                    text-align: start;
-                }
-                & > #create {
-                    margin: 10px 0;
-                    align-self: flex-start;
-                    gap: 10px;
-                    & > p {
-                        align-self: flex-start;
-                        color: $color-accent;
-                        font-weight: 600;
-                    }
-                    & > svg {
-                        color: $color-accent;
-                    }
-                }
-            }
-            &-title {
-                padding: 16px 0;
-                width: 100%;
-                text-align: start;
-                border-top: 1px solid $color-border-secondary;
-                font-size: 20px;
-                font-weight: 500;
-            }
-            &-list {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                gap: 20px;
-            }
-            & > #lists {
-                margin-top: 10px;
-            }
+            grid-column: auto/span 2;
         }
     }
 }

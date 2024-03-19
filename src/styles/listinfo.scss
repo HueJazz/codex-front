@@ -1,0 +1,308 @@
+.listinfo {
+    &-container {
+        &-header {
+            width: 100%;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            column-gap: 24px;
+            background-color: $color-border-primary;
+            &-spacingcol {
+                grid-column: auto/span 1;
+            }
+            &-lcol {
+                padding: 24px;
+                grid-column: auto/span 10;
+                display: flex;
+                flex-direction: column;
+                & > p {
+                    font-size: 20px;
+                    text-align: start;
+                    color: $color-text-secondary ;
+                    & > span {
+                    text-decoration: underline;
+                    text-underline-offset: 8px;
+                    }
+                }
+                &-actions {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin: 16px 0;
+                    & > p {
+                        font-size: 36px;
+                        font-weight: 500;
+                    }
+                    & > #edit, & > #delete {
+                        height: 32px;
+                        width: 32px;
+                        & > svg {
+                            height:20px;
+                            width: 20px;
+                        }
+                    }
+                }
+                &-socials {
+                    display: flex;
+                    flex-direction: row;
+                    align-self: flex-end;
+                    gap: 8px;
+                    & > #facebook, & > #twitter, & > #linkedin, & > #mail {
+                        background-color: #fff;
+                        height: 32px;
+                        width: 32px;
+                        & > svg {
+                            height:20px;
+                            width: 20px;
+                        }
+                    }
+                    & > #facebook > svg {
+                        color:#316FF6
+                    }
+                    & > #twitter > svg {
+                        color:#1DA1F2
+                    }
+                    & > #linkedin > svg {
+                        color:#0077B5
+                    }
+                }
+            }
+        }
+        &-main {
+            width: 100%;
+            max-width: 1248px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            column-gap: 24px;
+            &-spacingcol {
+                grid-column: auto/span 1;
+            }
+            &-lcol {
+                padding: 28px 0px;
+                grid-column: auto/span 6;
+                &-actions {
+                    width: 100%;
+                    max-width: 680px;
+                    margin: 0 auto;
+                    padding: 10px 24px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    & > p {
+                        font-weight: 400;
+                    }
+                    &-sort {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 8px;
+                        & > p {
+                            font-weight: 400;
+                        }
+                        & > #filter {
+                            display: flex;
+                            gap: 4px;
+                            text-transform: none;
+                            & > p {
+                                color: $color-accent;
+                                font-weight: 400;
+                            }
+                            & > svg {
+                                color: $color-accent;
+                                height: 14px;
+                                width: 14px;
+                            }
+                        }
+                        & > #reverse {
+                            transform: rotate(90deg);
+                            & > svg {
+                                height: 14px;
+                                width: 14px;
+                            }
+                        }
+                    }
+                }
+                &-books {
+                    width: 100%;
+                    max-width: 680px;
+                    margin: 0 auto;
+                    padding: 0 24px;
+                    &-item {
+                        position: relative;
+                        border-top: 1px solid $color-border-secondary;
+                        .MuiCollapse-wrapperInner {
+                            display: inherit;
+                            & > .no-style-link {
+                                padding: 24px;
+                                width: 100%;
+                                display: flex;
+                            }
+                            &:hover {
+                                .listinfo-container-main-lcol-books-item-image {
+                                    filter: brightness(0.95);
+                                }
+                            }
+                        }
+                        &-image {
+                            position: relative;
+                            height: 144px;
+                            width: 110px;
+                            border: 1px solid $color-border-secondary;
+                            & > img {
+                                height: 100%;
+                                width: 108px;
+                            }
+                            &-poper {
+                                animation: fadeIn 0.2s ease-out;
+                                position: absolute;
+                                bottom: 0;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                background-color: rgba($color-text-primary, 0.8);
+                                width: 100%;
+                                & > p {
+                                    color: $color-text-tertiary;  
+                                    padding: 4px 0;
+                                }
+                            }
+                        }
+                        &-data {
+                            padding-left: 12px;
+                            display: flex;
+                            flex-direction: column;
+                            text-align: start;
+                            width: 100%;
+                            &-title {
+                                display: -webkit-box;
+                                overflow: hidden;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                margin-bottom: 6px;
+                                max-width: 90%;
+                                font-size: 20px;
+                                font-weight: 600;
+                            }
+                            &-author {
+                                display: -webkit-box;
+                                overflow: hidden;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                max-width: 90%;
+                                font-size: 18px;
+                                font-weight: 400;
+                            }
+                            &-progress {
+                                margin-top: 10px;
+                                max-width: 285px;
+                                height: 5px;
+                                background-color: $color-border-secondary;
+                                border-radius: 10px;
+                            }
+                            & > .finished {
+                                background-color: $color-text-primary;
+                            }
+                            &-pages {
+                                margin-top: auto;
+                            }
+                            &-finished {
+                                margin-top: auto;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                gap: 8px;
+                            }
+                        }
+                        &-actions {
+                            position: absolute;
+                            right: 24px;
+                            top: 24px;
+                            & > #more {
+                                width: 30px;
+                                height: 30px;
+                                & > svg {
+                                    width: 16px;
+                                    height: 16px;
+                                }
+                            }
+                            &-list{
+                                width: 220px;
+                                position: absolute;
+                                top: 0px;
+                                right: 32px;
+                                z-index: 10;
+                                display: flex;
+                                flex-direction: column;
+                                padding: 8px 0;
+                                background-color: $color-text-tertiary;
+                                border: 1px solid $color-border-primary;
+                                border-radius: 4px;
+                                box-shadow: 0 0 10px rgba(0,0,0,.1);
+                                animation: fadeIn 0.2s ease-in-out;
+                                &-item {
+                                    & > button {
+                                        width: 100%;
+                                        text-transform: none;
+                                        & > p {
+                                            color: $color-text-primary;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &-rcol {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 28px 0px;
+                grid-column: auto/span 3;
+                &-header {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    padding: 10px 0;
+                    &-new {
+                        font-size: 18px;
+                        font-weight: 500;
+                        margin-bottom: 14px;
+                    }
+                    & > #create {
+                        margin: 10px 0;
+                        display: flex;
+                        justify-content: start;
+                        gap: 10px;
+                        width: 100%;
+                        & > p {
+                            color: $color-accent;
+                            font-weight: 600;
+                        }
+                        & > svg {
+                            color: $color-accent;
+                        }
+                    }
+                }
+                &-title {
+                    padding: 16px 0;
+                    width: 100%;
+                    text-align: start;
+                    border-top: 1px solid $color-border-secondary;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+                &-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                & > #lists {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}

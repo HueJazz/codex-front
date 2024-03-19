@@ -140,7 +140,7 @@
                                 }
                             }
                         }
-                        &-save, &-download, &-share {
+                        &-save, &-rate, &-add, &-share {
                             border-bottom: 1px solid $color-border-primary;
                             & > button {
                                 width: 100%;
@@ -150,6 +150,9 @@
                                 margin: 4px 0;
                                 gap: 8px;
                                 text-transform: none;
+                                &:disabled {
+                                    opacity: 0.5;
+                                }
                                 & > svg {
                                     color: $color-text-primary;
                                     height: 20px;
@@ -331,63 +334,60 @@
                 }
                 &-preview {
                     &-card {
-                        border-bottom: 1px solid $color-border-primary;
+                        border-top: 1px solid $color-border-primary;
                         .MuiCollapse-wrapperInner {
                             padding: 48px 0;
                             display: inherit;
+                            align-items: flex-start;
+                            & > #user {
+                                width: 48px;
+                                height: 48px;
+                                & > svg {
+                                    width: 90%;
+                                    height: 90%;
+                                }
+                            }
                         }
                         &-lcol {
-                            min-width: 180px;
-                            margin-right: 24px;
-                            & > p {
-                                margin-bottom: 8px;
-                                font-weight: 500;
-                            }
-                            &-rating {
-                                display: flex;
-                                align-items: center;
-                                gap: 6px;
-                                margin-bottom: 12px;
-                                & > p {
-                                    margin-left: 2px;
+                            width: 20%;
+                            display: flex;
+                            flex-direction: column;
+                            & > #user {
+                                align-self: center;
+                                width: 48px;
+                                height: 48px;
+                                & > svg {
+                                    width: 80%;
+                                    height: 80%;
                                 }
-                                & > span {
-                                    line-height: 24px;
-                                    text-decoration: underline;
-                                    font-weight: 400;
-                                    margin-left: 4px;
-                                } 
-                                &-stars {
-                                    position: relative;
-                                    & > svg {
-                                        color: $color-star-filled;
-                                        height: 16px;
-                                        width: 16px;
-                                    }
-                                    & > .placeholder {
-                                        position: absolute;
-                                        z-index: -1;
-                                        right: 0;
-                                        color: $color-star-empty;
-                                    }
-                                    & > .empty {
-                                        color: transparent;
-                                    }
+                            }
+                            & > #profile {
+                                width: 80%;
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: flex-start;
+                                padding: 4px;
+                                gap: 8px;
+                                & > svg {
+                                    width: 16px;
+                                    height: 16px;
                                 }
                             }
                             &-actions {
                                 display: flex;
                                 flex-direction: column;
-                                & > #edit, & > #delete {
+                                & > #edit, & > #delete, & > #profile {
+                                    width: 80%;
                                     display: flex;
                                     flex-direction: row;
                                     justify-content: flex-start;
-                                    padding: 4px 6px;
+                                    padding: 4px;
                                     gap: 8px;
-                                    text-transform: none;
-                                    & > p {
-                                        font-weight: 500;
+                                    & > svg {
+                                        width: 16px;
+                                        height: 16px;
                                     }
+
                                 }
                                 & > #delete {
                                     color: $color-error;
@@ -395,25 +395,85 @@
                             }
                         }
                         &-rcol {
-                            margin-top: 8px;
-                            &-actions {
-                                display: flex;
-                                align-items: center;
-                                margin-top: 24px;
-                                & > p {
-                                    margin-right: 8px;
-                                }
+                            display: flex;
+                            flex-direction: column;
+                            width: 80%;
+                            &-header {
                                 display: flex;
                                 flex-direction: row;
-                                &-like, &-dislike {
-                                    gap: 5px;
+                                justify-content: space-between;
+                                margin-bottom: 12px;
+                                &-user {
                                     display: flex;
-                                    & > span {
-                                        font-weight: 600;
+                                    flex-direction: row;
+                                    gap: 8px;
+                                    & > p {
+                                        color: $color-text-secondary;
+                                        & > .no-style-link {
+                                            color: $color-text-primary;
+                                            font-weight: 400;
+                                        }
+                                    }
+                                    &-rating {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 2px;
+                                        &-stars {
+                                            position: relative;
+                                            & > svg {
+                                                color: $color-star-filled;
+                                                height: 16px;
+                                                width: 16px;
+                                            }
+                                            & > .empty {
+                                                color: transparent;
+                                            }
+                                        }
                                     }
                                 }
-                                &-dislike {
-                                    margin-left: 12px;
+                                &-date {
+                                }
+                            }
+                            &-text {
+
+                            }
+                            &-list {
+                                margin-top: 24px;
+                                display: flex;
+                                flex-direction: row;
+                                & > li {
+                                    display: flex;
+                                    & > p {
+                                        font-size: 15px;
+                                    }
+                                }
+                                > li:not(:last-child):after {
+                                    content: "·";
+                                    color: $color-text-secondary;
+                                    padding: 0 8px;
+                                    font-size: 48px;
+                                    line-height: 20px;
+                                }
+                            }
+                            &-actions {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                gap: 4px;
+                                margin-left: -8px;
+                                & > p {
+                                    font-weight: 500;
+                                    margin-right: 16px;
+                                    color: $color-text-secondary;
+                                }
+                                & > #like, & > #comment, & > #more {
+                                    & > svg {
+                                        width: 16px;
+                                        height: 16px;
+                                    }
+                                }
+                                & > #more {
+                                    transform: rotate(90deg);
                                 }
                             }
                         }

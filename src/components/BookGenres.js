@@ -23,6 +23,7 @@ function BookGenres ({ genres, isLoading }) {
             <Swiper
                 slidesPerView={'auto'}
                 navigation={true}
+                cssMode={true}
                 modules={[Navigation]}
                 spaceBetween={24}
                 style={{ paddingLeft: '20px', paddingRight: '20px' }}

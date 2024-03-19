@@ -8,11 +8,13 @@ import { Button } from "@mui/material";
 import { useSnackbar } from 'notistack';
 import { saveBook, deleteBook, getLibrary } from "../reducers/libraryReducer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark, faShareFromSquare, faCircleDown } from '@fortawesome/free-regular-svg-icons';
-import { faBookmark as faBookmarkSolid} from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faShareFromSquare, faCircleDown, faStar } from '@fortawesome/free-regular-svg-icons';
+import { faBookmark as faBookmarkSolid, faListUl} from '@fortawesome/free-solid-svg-icons';
 import BookRating from "./BookRating";
 import BookGenres from "./BookGenres";
 import { getColorFromId } from "../utils/getColorFromId";
+import { openModal } from "../reducers/listsReducer";
+import ListsModal from "./ListsModal";
 
 function BookInfo () {
 
@@ -21,6 +23,7 @@ function BookInfo () {
     const { enqueueSnackbar } = useSnackbar();
 
     const [isSaved, setIsSaved] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
     const {book, bookLoading} = useSelector((state) => state.book)
     const {library} = useSelector((state) => state.library)
 
@@ -36,20 +39,22 @@ function BookInfo () {
             : setIsSaved(false)
     }, [library, bookId]);
 
-    const handleSave = () => {
-        dispatch(saveBook(bookId))
-        enqueueSnackbar('Saved to My Books')
-    }
-
-    const handleDelete = () => {
-        dispatch(deleteBook(bookId))
-        enqueueSnackbar('Removed from My Books')
-      }
+    const handleAction = async (action) => {
+        setIsLoading(true);
+        const actionText = action === "save" ? "Saved to" : "Removed from";
+        try {
+            await dispatch(action === "save" ? saveBook(book._id) : deleteBook(book._id));
+            enqueueSnackbar(`${actionText} My Books`);
+        } catch (error) {
+            enqueueSnackbar(`Error ${actionText.toLowerCase()} book`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="bookinfo">
-            {bookLoading ?
-                <BookInfoSkeleton /> :
+            {bookLoading ? <BookInfoSkeleton /> :
                 <div className="bookinfo-container">
                     <div className="bookinfo-container-main">
                         <div className="bookinfo-container-main-spacingcol"></div>
@@ -113,20 +118,27 @@ function BookInfo () {
                                         </Button>
                                     </li>
                                     <li className="bookinfo-container-main-rcol-actions-list-save">
-                                        {isSaved ? <Button id="save" onClick={handleDelete}>
-                                            <FontAwesomeIcon icon={faBookmarkSolid} />                        
-                                            <p>Remove from Saved</p>
-                                        </Button> :
-                                        <Button id="save" onClick={() => handleSave()}>
-                                            <FontAwesomeIcon icon={faBookmark} />                        
-                                            <p>Save for later</p>
-                                        </Button>}
-                                    </li>
-                                    <li className="bookinfo-container-main-rcol-actions-list-download">
-                                        <Button id="download">
-                                            <FontAwesomeIcon icon={faCircleDown} />                                            
-                                            <p>Download epub</p>
+                                        <Button id={isSaved ? "delete" : "save"} disabled={isLoading}
+                                            onClick={() => handleAction(isSaved ? "delete" : "save")}>
+                                            <FontAwesomeIcon icon={isSaved ? faBookmarkSolid : faBookmark} />
+                                            {isSaved ? <p>Remove from Saved</p> : <p>Save for later</p>}
                                         </Button>
+                                    </li>
+                                    <li className="bookinfo-container-main-rcol-actions-list-rate">
+                                        <Button id="rate" 
+                                        // onClick={() => dispatch(openModalRatings())}
+                                        >
+                                            <FontAwesomeIcon icon={faStar}/>                                            
+                                            <p>Rate this book</p>
+                                        </Button>
+                                        {/* <RatingsModal book={book}/> */}
+                                    </li>
+                                    <li className="bookinfo-container-main-rcol-actions-list-add">
+                                        <Button id="add" onClick={() => dispatch(openModal())}>
+                                            <FontAwesomeIcon icon={faListUl}/>                                            
+                                            <p>Add to List</p>
+                                        </Button>
+                                        <ListsModal book={book}/>
                                     </li>
                                     <li className="bookinfo-container-main-rcol-actions-list-share">
                                         <Button id="share">

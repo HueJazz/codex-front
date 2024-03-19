@@ -1,5 +1,4 @@
 import React from "react"
-import Header from "../components/Header";
 import BookCollectionHeader from "../components/BookCollectionHeader";
 
 import { Outlet, useParams } from "react-router-dom";
@@ -10,7 +9,6 @@ function GenreLayout () {
 
     return (
         <div>
-            <Header />
             <BookCollectionHeader genre={genreName}/>
             <Outlet />
         </div>
