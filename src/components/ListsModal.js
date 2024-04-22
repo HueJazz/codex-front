@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TransitionGroup } from 'react-transition-group';
 import { useSnackbar } from 'notistack';
 import { getLists, createList, addToListModal, removeFromListModal } from "../reducers/listsReducer";
-import { closeModal } from "../reducers/listsReducer";
+import { closeListsModal } from "../reducers/listsReducer";
 
 function ListsModal ({ book }) {
 
@@ -45,7 +45,7 @@ function ListsModal ({ book }) {
             enqueueSnackbar('Error adding book');
         } finally {
             setIsLoading(false);
-            dispatch(closeModal())
+            dispatch(closeListsModal())
             dispatch(getLists(userData._id))
         }
     }
@@ -59,7 +59,7 @@ function ListsModal ({ book }) {
             enqueueSnackbar('Error removing book');
         } finally {
             setIsLoading(false);
-            dispatch(closeModal())
+            dispatch(closeListsModal())
             dispatch(getLists(userData._id))
         }
     }
@@ -67,7 +67,7 @@ function ListsModal ({ book }) {
     return (
         <Modal
             open={isOpen}
-            onClose={() => dispatch(closeModal())}
+            onClose={() => dispatch(closeListsModal())}
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
         >
@@ -107,7 +107,7 @@ function ListsModal ({ book }) {
                         </Button>
                     </div>
                 </Modal>
-                <IconButton id="close" onClick={() => dispatch(closeModal())}>
+                <IconButton id="close" onClick={() => dispatch(closeListsModal())}>
                     <FontAwesomeIcon icon={faXmark} />
                 </IconButton>
                 {!listsLoading && lists.length >= 1 ? 

@@ -6,7 +6,7 @@ import libraryReducer from "../reducers/libraryReducer";
 import genresReducer from "../reducers/genresReducer";
 import searchReducer from "../reducers/searchReducer";
 import listsReducer from "../reducers/listsReducer";
-
+import ratingReducer from "../reducers/ratingReducer";
 
 export default configureStore({
     reducer: {
@@ -17,5 +17,6 @@ export default configureStore({
         genres: genresReducer,
         search: searchReducer,
         lists: listsReducer,
+        rating: ratingReducer,
     }
 })

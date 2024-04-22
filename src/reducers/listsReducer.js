@@ -113,10 +113,10 @@ const listsSlice = createSlice({
     name: 'lists',
     initialState,
     reducers: {
-        openModal (state, action) {
+        openListsModal (state, action) {
             state.isOpen = true;
         },
-        closeModal (state, action) {
+        closeListsModal (state, action) {
             state.isOpen = false;
         }
     },
@@ -161,6 +161,6 @@ const listsSlice = createSlice({
     }
 })
 
-export const {openModal, closeModal} = listsSlice.actions
+export const {openListsModal, closeListsModal} = listsSlice.actions
 
 export default listsSlice.reducer

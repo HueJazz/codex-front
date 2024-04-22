@@ -46,6 +46,10 @@ const searchSlice = createSlice({
     reducers: {
         resetSearch (state, action) {
             state.suggestions = [];
+        },
+        setSuggestions (state, action) {
+            state.suggestions = action.payload;
+            state.suggestionsLoading = false;
         }
     },
     extraReducers: builder => {
@@ -73,6 +77,6 @@ const searchSlice = createSlice({
     }
 })
 
-export const {resetSearch} = searchSlice.actions
+export const {resetSearch, setSuggestions} = searchSlice.actions
 
 export default searchSlice.reducer

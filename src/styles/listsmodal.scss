@@ -1,15 +1,63 @@
 .modal {
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 50%;
-    transform: translate(-50%, -20%);
-    width: 300px;
+    transform: translate(-50%, -30%);
+    min-width: 320px;
+    max-width: 450px;
     background-color: #fff;
     border: 1px solid $color-border-secondary;
     box-shadow: 0 0 10px rgba(0,0,0,.75);
     & > h1 {
         width: 100%;
         padding: 12px 24px;
+        border-bottom: 1px solid $color-border-secondary;
+    }
+    &-book {
+        padding: 12px 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        & > svg {
+            padding-left: 8px;
+            color: $color-star-filled;
+        }
+        &-title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+    &-rating {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        & > .MuiRating-root {
+            margin: 10px 0 20px 0;
+            & > label {
+                color: $color-star-filled;
+                padding: 4px;
+            }
+        }
+    }
+    & > #rate {
+        margin: 0 24px 8px 24px;
+        padding: 8px;
+        width: calc(100% - 48px);
+        background-color: $color-accent;
+        & > p {
+            font-weight: 400;
+            color: $color-text-tertiary;
+        }
+    }
+    & > #unrate {
+        margin: 0 24px 18px 24px;
+        padding: 6px;
+        width: calc(100% - 48px);
+        & > p {
+            font-size: 15px;
+            font-weight: 400;
+        }
     }
     & > #add {
         display: flex;
@@ -17,8 +65,6 @@
         gap: 10px;
         padding: 12px 24px;
         width: 100%;
-        border-bottom: 1px solid $color-border-secondary;
-        border-top: 1px solid $color-border-secondary;
         & > p {
             font-weight: 600;
             font-size: 18px;
@@ -89,8 +135,8 @@
             background-color: $color-accent;
             & > p {
                 padding: 6px;
-                font-size: 20px;
-                font-weight: 600;
+                font-size: 18px;
+                font-weight: 500;
                 color: #fff;
             }
         }
@@ -105,6 +151,7 @@
         }
     }
     &-lists {
+        border-top: 1px solid $color-border-secondary;
         padding: 10px 0;
         max-height: 220px;
         min-height: 150px;

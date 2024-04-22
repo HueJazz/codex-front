@@ -17,7 +17,6 @@ function GenreOverview () {
 
     useEffect(() => {
         dispatch(getRelatedGenres(genreName))
-        dispatch(getLibrary())
     }, [dispatch, genreName])
 
     return (

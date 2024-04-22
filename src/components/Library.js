@@ -12,7 +12,7 @@ import { useClickOutside} from '../hooks/useClickOutside'
 import { NavLink } from "react-router-dom";
 import ListsCard from "./ListsCard";
 import ListsModal from "./ListsModal";
-import { openModal, getLists } from "../reducers/listsReducer";
+import { openListsModal, getLists } from "../reducers/listsReducer";
 
 function Library () {
 
@@ -133,7 +133,7 @@ function Library () {
                                                         </Button>}
                                                 </li>
                                                 <li className="library-container-lcol-list-item-actions-list-item">
-                                                    <Button id="add" onClick={() => { dispatch(openModal()); setShowActions(false) }}>
+                                                    <Button id="add" onClick={() => { dispatch(openListsModal()); setShowActions(false) }}>
                                                         <p>Add to list</p>
                                                     </Button>
                                                 </li>

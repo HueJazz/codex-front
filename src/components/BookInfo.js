@@ -13,8 +13,10 @@ import { faBookmark as faBookmarkSolid, faListUl} from '@fortawesome/free-solid-
 import BookRating from "./BookRating";
 import BookGenres from "./BookGenres";
 import { getColorFromId } from "../utils/getColorFromId";
-import { openModal } from "../reducers/listsReducer";
+import { openListsModal } from "../reducers/listsReducer";
+import { getRating, openRatingModal } from "../reducers/ratingReducer";
 import ListsModal from "./ListsModal";
+import RatingModal from "./RatingModal";
 
 function BookInfo () {
 
@@ -26,11 +28,14 @@ function BookInfo () {
     const [isLoading, setIsLoading] = useState(false);
     const {book, bookLoading} = useSelector((state) => state.book)
     const {library} = useSelector((state) => state.library)
+    const token = window.localStorage.getItem('token')
 
     useEffect(() => {
         dispatch(getBook(bookId));
-        dispatch(getLibrary());
-    
+        if (token) {
+            dispatch(getLibrary());
+            dispatch(getRating(bookId))
+        }
     }, [dispatch, bookId]);
     
     useEffect(() => {
@@ -125,16 +130,15 @@ function BookInfo () {
                                         </Button>
                                     </li>
                                     <li className="bookinfo-container-main-rcol-actions-list-rate">
-                                        <Button id="rate" 
-                                        // onClick={() => dispatch(openModalRatings())}
+                                        <Button id="rate" onClick={() => dispatch(openRatingModal())}
                                         >
                                             <FontAwesomeIcon icon={faStar}/>                                            
                                             <p>Rate this book</p>
                                         </Button>
-                                        {/* <RatingsModal book={book}/> */}
+                                        <RatingModal book={book}/>
                                     </li>
                                     <li className="bookinfo-container-main-rcol-actions-list-add">
-                                        <Button id="add" onClick={() => dispatch(openModal())}>
+                                        <Button id="add" onClick={() => dispatch(openListsModal())}>
                                             <FontAwesomeIcon icon={faListUl}/>                                            
                                             <p>Add to List</p>
                                         </Button>

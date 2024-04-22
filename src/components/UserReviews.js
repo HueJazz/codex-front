@@ -12,7 +12,7 @@ import { TransitionGroup } from 'react-transition-group';
 import { faHeart, faComment, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarSolid, faHeart as faHeartSolid, faUserTie, faEllipsisV, faAngleRight, faCaretDown, faRightLeft } from '@fortawesome/free-solid-svg-icons';
 import { useClickOutside} from '../hooks/useClickOutside'
-import { openModal, getLists } from "../reducers/listsReducer";
+import { openListsModal, getLists } from "../reducers/listsReducer";
 
 function Profile () {
 
@@ -121,7 +121,7 @@ function Profile () {
                                                     </Button>
                                                 </li>
                                                 <li className="userreviews-container-lcol-list-item-actions-list-item">
-                                                    <Button id="add" onClick={() => { dispatch(openModal()); setShowActions(false) }}>
+                                                    <Button id="add" onClick={() => { dispatch(openListsModal()); setShowActions(false) }}>
                                                         <p>Add to list</p>
                                                     </Button>
                                                 </li>

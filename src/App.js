@@ -30,6 +30,7 @@ function App() {
         <Router>
           <Routes>
             <Route element={<HomeLayout />}>
+              <Route index element={<Home/>}/>
               <Route path="search/:item" element={<BookSearch/>}/>
               <Route path="/books/:bookId" element={<BookInfo/>}/>
               <Route path="/library" element={<Library/>}/>
@@ -37,8 +38,6 @@ function App() {
               <Route path="/lists/:listId" element={<ListInfo/>}/>
               <Route path="/users/:userid/reviews" element={<UserReviews />}/>
               <Route path="/" element={<GenreLayout />}>
-                <Route index element={<Home/>}/>
-                <Route path="top" element={<GenreTop/>}/>
                 <Route path="genres/:genreName"  element={<GenreOverview/>}/>
                 <Route path="genres/:genreName/top" element={<GenreTop/>}/>
               </Route>

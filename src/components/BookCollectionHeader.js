@@ -1,6 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
 import { Button } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Genre } from "../utils/constants";
 
 function BookCollectionHeader({ genre }) {
 
@@ -15,10 +16,9 @@ function BookCollectionHeader({ genre }) {
     return (
         <div className="bookcollectionheader">
             <div className="bookcollectionheader-container">
-                <h1>Ebooks</h1>
-                <p>Explore our vast array of top-selling ebooks, offering a rich tapestry of genres 
-                    including mystery, romance, science fiction, historical fiction, non-fiction, 
-                    and more. With acclaimed titles and the latest releases, there's something to captivate every reader.</p>
+                <h1>{genre}</h1>
+                {console.log(Object.values(Genre).filter(key => key == genre))}
+                <p>{Genre[genre]}</p>
                 <ul className={'bookcollectionheader-container-tabs'}>
                     <li className={`bookcollectionheader-container-tabs-item ${activeTab === 0 ? 'active' : ''}`}>
                         <Button onClick={() => {navigate(location.pathname === '/top' || location.pathname === '/' ? '/' : `/genres/${genre}`)}}>
