@@ -18,6 +18,10 @@
                 gap: 16px;
                 &-item {
                     margin-left: 16px;
+                    & > button > p {
+                        letter-spacing: 0.15px;
+                        font-weight: 400;
+                    }
                 }
                 &-item:last-child {
                     padding-left: 16px;

@@ -1,12 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { debounce } from "lodash"
 import { IconButton } from "@mui/material";
 import { faMagnifyingGlass, faXmark, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from "@mui/material";
 import { useClickOutside } from '../hooks/useClickOutside'
-import { setSuggestions, getSearchSuggestions } from "../reducers/searchReducer";
+import { setSuggestions, getSearchSuggestions, setSuggestionsLoading } from "../reducers/searchReducer";
 import { PulseLoader } from "react-spinners";
 
 function Search() {
@@ -18,7 +19,7 @@ function Search() {
     const searchOptionsRef = useRef(null)
     const searchOptionsButtonRef = useRef(null)
     const searchSuggestionsRef = useRef(null)
-    const searchSuggestionsInputRef = useRef(null)
+    const searchInputRef = useRef(null)
 
     const [searchInput, setSearchInput] = useState('')
     const [showSearchOptions, setShowSearchOptions] = useState(false)
@@ -26,19 +27,26 @@ function Search() {
     const [selectedSearchOption, setSelectedSearchOption] = useState('All')
 
     const maxResults = 10;
+    
+    const debounceSetSuggestionsLoading = useCallback(debounce((isLoading) => {
+        dispatch(setSuggestionsLoading(isLoading));
+    }, 500), [dispatch]);
 
     useEffect(() => {
         const combinedKey = `${searchInput}_${selectedSearchOption}`;
         const storedSuggestions = sessionStorage.getItem(combinedKey);
 
-        console.log(JSON.parse(storedSuggestions))
+        // console.log(JSON.parse(storedSuggestions))
         
         if (storedSuggestions) {
             dispatch(setSuggestions(JSON.parse(storedSuggestions)));
+            debounceSetSuggestionsLoading(false);
         } else if (searchInput !== '') {
+            debounceSetSuggestionsLoading(true);
             dispatch(getSearchSuggestions({ searchInput, selectedSearchOption, maxResults }))
             .then((response) => {
                 sessionStorage.setItem(combinedKey, JSON.stringify(response.payload))
+                debounceSetSuggestionsLoading(false);  
             })
         }
     }, [dispatch, searchInput, selectedSearchOption]);
@@ -52,11 +60,15 @@ function Search() {
     };
 
     const handleSubmit = () => {
-        navigate(`/search/${searchInput}?sortBy=${selectedSearchOption}`)
-        setSearchInput('')
+        if (searchInput == '' || (suggestions.genres.length + suggestions.books.length) === 0) {
+            searchInputRef.current.focus()
+        } else {
+            navigate(`/search/${searchInput}?sortBy=${selectedSearchOption}`)
+            setSearchInput('')
+        }
     }
 
-    useClickOutside(searchSuggestionsRef, searchSuggestionsInputRef, () => {
+    useClickOutside(searchSuggestionsRef, searchInputRef, () => {
         setShowSearchSuggestions(false)
     })
 
@@ -96,7 +108,7 @@ function Search() {
             </div>
             <input type="text" placeholder="Search Books"
                 value={searchInput}
-                ref={searchSuggestionsInputRef}
+                ref={searchInputRef}
                 autoCorrect="off"
                 autoComplete="off"
                 onFocus={() => setShowSearchSuggestions(true)}
@@ -117,7 +129,7 @@ function Search() {
             {searchInput && showSearchSuggestions ?
                 <div ref={searchSuggestionsRef} className="header-container-search-suggestions">
                     {suggestionsLoading ? (
-                        <PulseLoader className="header-container-search-suggestions-loader" color="#1e7b85" size="10" />
+                        <PulseLoader className="header-container-search-suggestions-loader" color="#1e7b85" size="10px" />
                     ) : (
                         (suggestions.genres.length + suggestions.books.length) === 0 ? (
                             <p className="header-container-search-suggestions-notfound">No results found for "{searchInput}"</p>

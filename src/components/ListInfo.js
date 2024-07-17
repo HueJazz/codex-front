@@ -70,10 +70,10 @@ function ListInfo () {
             {listLoading || listsLoading ? <LibrarySkeleton /> : 
                 <div className="listinfo-container">
                     <div className="listinfo-container-header">
-                        <div className="listinfo-container-header-spacingcol"></div>
-                        <div className="listinfo-container-header-lcol">
+                        <div className="listinfo-container-header-spacing"></div>
+                        <div className="listinfo-container-header-info">
                             <p>Created by: <NavLink className='no-style-link' to={`/users/${list.userId}`}>{list.userName}</NavLink></p>
-                            <div className="listinfo-container-header-lcol-actions">
+                            <div className="listinfo-container-header-info-actions">
                                 <p>{list.listName}</p>
                                 <IconButton id="edit">
                                     <FontAwesomeIcon icon={faPen} />
@@ -82,7 +82,7 @@ function ListInfo () {
                                     <FontAwesomeIcon icon={faTrashCan} />
                                 </IconButton>
                             </div>
-                            <div className="listinfo-container-header-lcol-socials">
+                            <div className="listinfo-container-header-info-socials">
                                 <IconButton id="facebook">
                                     <FontAwesomeIcon icon={faFacebookF} />
                                 </IconButton>
@@ -97,7 +97,7 @@ function ListInfo () {
                                 </IconButton>
                             </div>
                         </div>
-                        <div className="listinfo-container-header-spacingcol"></div>
+                        <div className="listinfo-container-header-spacing"></div>
                     </div>
                     <div className="listinfo-container-main">
                         <div className="listinfo-container-main-spacingcol"></div>

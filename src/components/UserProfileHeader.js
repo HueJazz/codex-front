@@ -15,12 +15,12 @@ function UserProfileHeader () {
                 <div className="userprofileheader-container">
                     <div className="userprofileheader-container-spacing"></div>
                     <div className="userprofileheader-container-info">
-                        <IconButton id="user">
-                            <FontAwesomeIcon icon={faUserTie} />
-                        </IconButton>
-                        <p>{userProfile.userName}</p>
-                    </div>
-                    <div className="userprofileheader-container-actions">
+                        <div className="userprofileheader-container-info-main">
+                            <IconButton id="user">
+                                <FontAwesomeIcon icon={faUserTie} />
+                            </IconButton>
+                            <p>{userProfile.userName}</p>
+                        </div>
                         <Button id="edit" variant="outlined">
                             <p>Edit Profile</p>
                         </Button>

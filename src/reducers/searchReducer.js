@@ -46,10 +46,13 @@ const searchSlice = createSlice({
     reducers: {
         resetSearch (state, action) {
             state.suggestions = [];
+            state.suggestionsLoading = false;
         },
         setSuggestions (state, action) {
             state.suggestions = action.payload;
-            state.suggestionsLoading = false;
+        },
+        setSuggestionsLoading (state, action) {
+            state.suggestionsLoading = action.payload;
         }
     },
     extraReducers: builder => {
@@ -68,7 +71,6 @@ const searchSlice = createSlice({
                 state.suggestionsLoading = true;
             })
             .addCase(getSearchSuggestions.fulfilled, (state, { payload }) => {
-                state.suggestionsLoading = false;
                 state.suggestions = payload;
             })
             .addCase(getSearchSuggestions.rejected, (state) => {
@@ -77,6 +79,6 @@ const searchSlice = createSlice({
     }
 })
 
-export const {resetSearch, setSuggestions} = searchSlice.actions
+export const {resetSearch, setSuggestions, setSuggestionsLoading} = searchSlice.actions
 
 export default searchSlice.reducer
