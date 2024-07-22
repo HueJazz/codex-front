@@ -62,7 +62,9 @@
                     border: 1px solid $color-border-primary;
                     border-radius: 4px;
                     box-shadow: 0 0 10px rgba(0,0,0,.1);
-                    animation: fadeIn 0.2s ease-in-out;
+                    transition-property: all;
+                    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                    transition-duration: 200ms;
                     &-item {
                         width: 100%;
                         padding: 2px 0;
@@ -71,6 +73,14 @@
                             width: 100%;
                         }
                     }
+                }
+                & > .hidden {
+                    visibility: hidden;
+                    opacity: 0;
+                }
+                & > .visible {
+                    visibility: visible;
+                    opacity: 100;
                 }
             }
             & > input {

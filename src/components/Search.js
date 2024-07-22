@@ -83,28 +83,28 @@ function Search() {
                     <p>{selectedSearchOption}</p>
                     <FontAwesomeIcon icon={faChevronDown} />
                 </Button>
-                {showSearchOptions ? <ul ref={searchOptionsRef} className="header-container-search-options-list">
+                <ul ref={searchOptionsRef} className={`header-container-search-options-list ${showSearchOptions ? 'visible': 'hidden'}`}>
                     <li className="header-container-search-options-list-item">
-                        <Button onClick={() => { setSelectedSearchOption('All'); setShowSearchOptions(false) }}>
+                        <Button onClick={() => { showSearchOptions ? setSelectedSearchOption('All') : setSelectedSearchOption((prev) => prev); setShowSearchOptions(false) }}>
                             <p>All</p>
                         </Button>
                     </li>
                     <li className="header-container-search-options-list-item">
-                        <Button onClick={() => { setSelectedSearchOption('Title'); setShowSearchOptions(false) }}>
+                        <Button onClick={() => { showSearchOptions ? setSelectedSearchOption('Title') : setSelectedSearchOption((prev) => prev); setShowSearchOptions(false) }}>
                             <p>Title</p>
                         </Button>
                     </li>
                     <li className="header-container-search-options-list-item">
-                        <Button onClick={() => { setSelectedSearchOption('Author'); setShowSearchOptions(false) }}>
+                        <Button onClick={() => { showSearchOptions ? setSelectedSearchOption('Author') : setSelectedSearchOption((prev) => prev); setShowSearchOptions(false) }}>
                             <p>Author</p>
                         </Button>
                     </li>
                     <li className="header-container-search-options-list-item">
-                        <Button onClick={() => { setSelectedSearchOption('Genre'); setShowSearchOptions(false) }}>
+                        <Button onClick={() => { showSearchOptions ? setSelectedSearchOption('Genre') : setSelectedSearchOption((prev) => prev); setShowSearchOptions(false) }}>
                             <p>Genre</p>
                         </Button>
                     </li>
-                </ul> : null}
+                </ul>
             </div>
             <input type="text" placeholder="Search Books"
                 value={searchInput}
